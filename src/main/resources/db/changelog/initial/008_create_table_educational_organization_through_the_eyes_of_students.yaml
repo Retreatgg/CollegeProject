@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table educational_organization_through_the_eyes_of_students
+      author: Argen
+      changes:
+        - createTable:
+            tableName: educational_organization_through_the_eyes_of_students
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: institution_name
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_institution_name_students
+                    references: institutions(name)
+              - column:
+                  name: group
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: form_of_education
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_form_of_education_name
+                    references: form_education(name)
+              - column:
+                  name: level_of_study
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_level_of_education_name
+                    references: level_of_education(name)
+              - column:
+                  name: course
+                  type: int
+
+

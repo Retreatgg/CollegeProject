@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table employer_assessment
+      author: Argen
+      changes:
+        - createTable:
+            tableName: employer_assessment
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: educational_programs
+                  type: varchar(150)
+              - column:
+                  name: start_year_cooperation
+                  type: date

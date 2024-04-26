@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table teacher_through_the_eyes_of_a_student
+      author: Argen
+      changes:
+        - createTable:
+            tableName: teacher_through_the_eyes_of_a_student
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: institution_name
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_institution_name
+                    references: institutions(name)
+              - column:
+                  name: group
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discipline
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: teacher_full_name
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: presentation_of_material
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: interest_subject
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proportionality_of_requirements_in_examinations
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: objectivity_in_assessment
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: relations_with_students
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ability_to_dialogue_with_student_audiences
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: using_modern_teaching_methods
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: involving_students_in_scientific_activities
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: culture_of_speech
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: appearance
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: evaluation_of_the_work_of_the_group_curator
+                  type: int
+                  constraints:
+                    nullable: false

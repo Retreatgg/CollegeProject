@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table satisfaction_rating
+      author: Argen
+      changes:
+        - createTable:
+            tableName: satisfaction_rating
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name_of_the_structural_unit
+                  type: varchar(150)
+              - column:
+                  name: is_employee_of_the_administration
+                  type: boolean
+              - column:
+                  name: academic_title
+                  type: varchar(100)
