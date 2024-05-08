@@ -34,4 +34,7 @@ databaseChangeLog:
               - column:
                   name: course
                   type: int
+              - column:
+                  name: date_of_passage
+                  type: datetime
 

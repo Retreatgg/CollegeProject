@@ -2,15 +2,20 @@ package com.example.college.dao;
 
 import com.example.college.model.TeacherThroughStudents;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class TeacherThroughStudentsDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public void createTeacherThroughStudentsDao(TeacherThroughStudents teacherThroughStudents) {
         String sql = """
@@ -45,6 +50,22 @@ public class TeacherThroughStudentsDao {
                 .addValue("culture_of_speech", teacherThroughStudents.getCultureOfSpeech())
                 .addValue("appearance", teacherThroughStudents.getAppearance())
                 .addValue("evaluation_of_the_work_of_the_group_curator", teacherThroughStudents.getEvaluationOfTheWorkOfTheGroupCurator()));
+    }
+
+    public Long countPassing() {
+        String sql = """
+                select max(id) from TEACHER_THROUGH_THE_EYES_OF_A_STUDENT
+                """;
+
+        return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    public List<TeacherThroughStudents> getResultsByInstitute() {
+        String sql = """
+                select * from TEACHER_THROUGH_THE_EYES_OF_A_STUDENT group by INSTITUTION_NAME
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(TeacherThroughStudents.class));
     }
 
 }

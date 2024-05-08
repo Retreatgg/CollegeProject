@@ -4,6 +4,8 @@ package com.example.college.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class OrganizationThroughUndergraduate {
@@ -13,5 +15,6 @@ public class OrganizationThroughUndergraduate {
     private String group;
     private String formOfEducation;
     private Integer course;
+    private LocalDateTime dateOfPassage;
 
 }

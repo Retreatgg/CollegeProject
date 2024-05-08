@@ -89,3 +89,6 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: false
+              - column:
+                  name: date_of_passage
+                  type: datetime

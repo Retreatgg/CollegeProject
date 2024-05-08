@@ -21,3 +21,6 @@ databaseChangeLog:
               - column:
                   name: academic_title
                   type: varchar(100)
+              - column:
+                  name: date_of_passage
+                  type: datetime

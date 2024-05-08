@@ -7,6 +7,8 @@ import com.example.college.service.EmployerAssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class EmployerAssessmentServiceImpl implements EmployerAssessmentService {
@@ -19,6 +21,7 @@ public class EmployerAssessmentServiceImpl implements EmployerAssessmentService 
 
         assessment.setEducationalPrograms(employerAssessmentCreateDto.getEducationalPrograms());
         assessment.setStartYearCooperation(employerAssessmentCreateDto.getStartYearCooperation());
+        assessment.setDateOfPassage(LocalDateTime.now());
 
         employerAssessmentDao.createEmployerAssessment(assessment);
     }
