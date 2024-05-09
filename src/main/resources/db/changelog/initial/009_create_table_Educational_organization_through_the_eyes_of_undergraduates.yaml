@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: long
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -34,6 +35,72 @@ databaseChangeLog:
               - column:
                   name: course
                   type: int
+              - column:
+                  name: correct_choice_organization
+                  type: integer
+              - column:
+                  name: correct_choice_direction
+                  type: integer
+              - column:
+                  name: quality_teaching
+                  type: integer
+              - column:
+                  name: pay_level
+                  type: integer
+              - column:
+                  name: participation_in_science
+                  type: integer
+              - column:
+                  name: quality_of_events
+                  type: integer
+              - column:
+                  name: relevance_of_information
+                  type: integer
+              - column:
+                  name: modern_equipment
+                  type: integer
+              - column:
+                  name: objectivity_of_teachers
+                  type: integer
+              - column:
+                  name: learning_outcomes
+                  type: integer
+              - column:
+                  name: access_to_technology
+                  type: integer
+              - column:
+                  name: library_work
+                  type: integer
+              - column:
+                  name: accessible_electronic_materials
+                  type: integer
+              - column:
+                  name: psychological_support
+                  type: integer
+              - column:
+                  name: canteen_work
+                  type: integer
+              - column:
+                  name: medical_service
+                  type: integer
+              - column:
+                  name: teaching_staff
+                  type: integer
+              - column:
+                  name: best_teacher
+                  type: varchar(150)
+              - column:
+                  name: worst_teacher
+                  type: varchar(150)
+              - column:
+                  name: positive
+                  type: varchar(150)
+              - column:
+                  name: negative
+                  type: varchar(150)
+              - column:
+                  name: appearance
+                  type: varchar(150)
               - column:
                   name: date_of_passage
                   type: datetime

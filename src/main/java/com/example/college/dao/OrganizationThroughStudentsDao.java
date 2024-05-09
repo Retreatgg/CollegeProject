@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -21,9 +22,22 @@ public class OrganizationThroughStudentsDao {
     public void createOrganizationThroughStudents(OrganizationThroughStudents organizationThroughStudents) {
         String sql = """
                 insert into EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_STUDENTS(
-                    institution_name, group, form_of_education, level_of_study, course
+                institution_name, group, form_of_education, level_of_study, course, 
+                correct_choice_organization, correct_choice_direction, quality_teaching, 
+                pay_level, participation_in_science, quality_of_events, relevance_of_information, 
+                modern_equipment, objectivity_of_teachers, learning_outcomes, access_to_technology, 
+                library_work, accessible_electronic_materials, psychological_support, canteen_work, 
+                medical_service, teaching_staff, best_teacher, worst_teacher, positive, negative, 
+                appearance, date_of_passage) 
+                values ( 
+                 :institution_name, :group, :form_of_education, :level_of_study, :course,
+                 :correct_choice_organization, :correct_choice_direction, :quality_teaching,
+                 :pay_level, :participation_in_science, :quality_of_events, :relevance_of_information,
+                 :modern_equipment, :objectivity_of_teachers, :learning_outcomes, :access_to_technology,
+                 :library_work, :accessible_electronic_materials, :psychological_support, :canteen_work,
+                :medical_service, :teaching_staff, :best_teacher, :worst_teacher, :positive, :negative,
+                :appearance, :date_of_passage                 
                 ) 
-                VALUES (:institution_name, :group, :form_of_education, :level_of_study, :course)
                 """;
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
@@ -31,7 +45,30 @@ public class OrganizationThroughStudentsDao {
                 .addValue("group", organizationThroughStudents.getGroup())
                 .addValue("form_of_education", organizationThroughStudents.getFormOfEducation())
                 .addValue("level_of_study", organizationThroughStudents.getLevelOfStudy())
-                .addValue("course", organizationThroughStudents.getCourse()));
+                .addValue("course", organizationThroughStudents.getCourse())
+                .addValue("correct_choice_organization", organizationThroughStudents.getCorrectChoiceOrganization())
+                .addValue("correct_choice_direction", organizationThroughStudents.getCorrectChoiceDirection())
+                .addValue("quality_teaching", organizationThroughStudents.getQualityTeaching())
+                .addValue("pay_level", organizationThroughStudents.getPayLevel())
+                .addValue("participation_in_science", organizationThroughStudents.getParticipationInScience())
+                .addValue("quality_of_events", organizationThroughStudents.getQualityOfEvents())
+                .addValue("relevance_of_information", organizationThroughStudents.getRelevanceOfInformation())
+                .addValue("modern_equipment", organizationThroughStudents.getModernEquipment())
+                .addValue("objectivity_of_teachers", organizationThroughStudents.getObjectivityOfTeachers())
+                .addValue("learning_outcomes", organizationThroughStudents.getLearningOutcomes())
+                .addValue("access_to_technology", organizationThroughStudents.getAccessToTechnology())
+                .addValue("library_work", organizationThroughStudents.getLibraryWork())
+                .addValue("accessible_electronic_materials", organizationThroughStudents.getAccessibleElectronicMaterials())
+                .addValue("psychological_support", organizationThroughStudents.getPsychologicalSupport())
+                .addValue("canteen_work", organizationThroughStudents.getCanteenWork())
+                .addValue("medical_service", organizationThroughStudents.getMedicalService())
+                .addValue("teaching_staff", organizationThroughStudents.getTeachingStaff())
+                .addValue("best_teacher", organizationThroughStudents.getBestTeacher())
+                .addValue("worst_teacher", organizationThroughStudents.getWorstTeacher())
+                .addValue("positive", organizationThroughStudents.getPositive())
+                .addValue("negative", organizationThroughStudents.getNegative())
+                .addValue("appearance", organizationThroughStudents.getAppearance())
+                .addValue("date_of_passage", organizationThroughStudents.getDateOfPassage()));
     }
 
 
@@ -43,11 +80,27 @@ public class OrganizationThroughStudentsDao {
         return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
-    public List<TeacherThroughStudents> getResultsByInstitute() {
+    public List<Map<String, Object>> getResultsByInstitute() {
         String sql = """
-                select * from EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_STUDENTS group by INSTITUTION_NAME
+                select INSTITUTION_NAME, count(*) as count from EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_STUDENTS group by INSTITUTION_NAME
                 """;
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(TeacherThroughStudents.class));
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    public List<Map<String, Object>> getGroupsWithCount() {
+        String sql = """
+                SELECT "GROUP", COUNT(*) AS count FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_STUDENTS GROUP BY "GROUP";
+                """;
+
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    public List<Map<String, Object>> getCoursesWithCount() {
+        String sql = """
+                SELECT "COURSE", COUNT(*) AS count FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_STUDENTS GROUP BY "COURSE";
+                """;
+
+        return jdbcTemplate.queryForList(sql);
     }
 }

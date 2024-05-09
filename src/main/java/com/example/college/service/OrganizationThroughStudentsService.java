@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 public interface OrganizationThroughStudentsService {
 
     void createOrganizationThroughStudents(OrganizationThroughStudentsCreateDto throughStudents);
+    void getGroups();
 }

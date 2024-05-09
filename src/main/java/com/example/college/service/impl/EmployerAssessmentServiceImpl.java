@@ -21,7 +21,25 @@ public class EmployerAssessmentServiceImpl implements EmployerAssessmentService 
 
         assessment.setEducationalPrograms(employerAssessmentCreateDto.getEducationalPrograms());
         assessment.setStartYearCooperation(employerAssessmentCreateDto.getStartYearCooperation());
+        assessment.setCountCompletedInternship(employerAssessmentCreateDto.getCountCompletedInternship());
+        assessment.setCreativity(employerAssessmentCreateDto.getCreativity());
+        assessment.setCountEmployed(employerAssessmentCreateDto.getCountEmployed());
+        assessment.setEducationalPrograms(employerAssessmentCreateDto.getEducationalPrograms());
         assessment.setDateOfPassage(LocalDateTime.now());
+        assessment.setBasicPracticalSkills(employerAssessmentCreateDto.getBasicPracticalSkills());
+        assessment.setAbilityToAcquireNewKnowledge(employerAssessmentCreateDto.getAbilityToAcquireNewKnowledge());
+        assessment.setCountWorkingInTheirSpecialty(employerAssessmentCreateDto.getCountWorkingInTheirSpecialty());
+        assessment.setGeneralTheoreticalTraining(employerAssessmentCreateDto.getGeneralTheoreticalTraining());
+        assessment.setNeedForInterpersonalSkills(employerAssessmentCreateDto.getNeedForInterpersonalSkills());
+        assessment.setImportanceForeignLanguages(employerAssessmentCreateDto.getImportanceForeignLanguages());
+        assessment.setIndependentWorkSkills(employerAssessmentCreateDto.getIndependentWorkSkills());
+        assessment.setProfessionalTrainingGraduates(employerAssessmentCreateDto.getProfessionalTrainingGraduates());
+        assessment.setQuestionsInTheQuestionnaire(employerAssessmentCreateDto.getQuestionsInTheQuestionnaire());
+        assessment.setStudentAbilities(employerAssessmentCreateDto.getStudentAbilities());
+        assessment.setStudentTraining(employerAssessmentCreateDto.getStudentTraining());
+        assessment.setTeamworkSkills(employerAssessmentCreateDto.getTeamworkSkills());
+        assessment.setYourSuggestionsForChanges(employerAssessmentCreateDto.getYourSuggestionsForChanges());
+        assessment.setWrittenAndOralLiteracy(employerAssessmentCreateDto.getWrittenAndOralLiteracy());
 
         employerAssessmentDao.createEmployerAssessment(assessment);
     }

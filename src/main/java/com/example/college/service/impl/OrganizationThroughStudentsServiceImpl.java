@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Service
@@ -25,8 +26,38 @@ public class OrganizationThroughStudentsServiceImpl implements OrganizationThrou
         organization.setFormOfEducation(throughStudents.getFormOfEducation().getName());
         organization.setLevelOfStudy(throughStudents.getLevelOfStudy().getName());
         organization.setInstitutionName(throughStudents.getInstitutionName().getName());
+        organization.setAccessibleElectronicMaterials(throughStudents.getAccessibleElectronicMaterials());
+        organization.setAccessToTechnology(throughStudents.getAccessToTechnology());
+        organization.setTeachingStaff(throughStudents.getTeachingStaff());
+        organization.setRelevanceOfInformation(throughStudents.getRelevanceOfInformation());
+        organization.setQualityTeaching(throughStudents.getQualityTeaching());
+        organization.setQualityOfEvents(throughStudents.getQualityOfEvents());
+        organization.setPsychologicalSupport(throughStudents.getPsychologicalSupport());
+        organization.setPositive(throughStudents.getPositive());
+        organization.setPayLevel(throughStudents.getPayLevel());
+        organization.setParticipationInScience(throughStudents.getParticipationInScience());
+        organization.setObjectivityOfTeachers(throughStudents.getObjectivityOfTeachers());
+        organization.setNegative(throughStudents.getNegative());
+        organization.setModernEquipment(throughStudents.getModernEquipment());
+        organization.setMedicalService(throughStudents.getMedicalService());
+        organization.setLibraryWork(throughStudents.getLibraryWork());
+        organization.setLearningOutcomes(throughStudents.getLearningOutcomes());
+        organization.setCorrectChoiceOrganization(throughStudents.getCorrectChoiceOrganization());
+        organization.setCorrectChoiceDirection(throughStudents.getCorrectChoiceDirection());
+        organization.setConvenienceOfSchedules(throughStudents.getConvenienceOfSchedules());
+        organization.setConvenienceOfClassrooms(throughStudents.getConvenienceOfClassrooms());
+        organization.setCanteenWork(throughStudents.getCanteenWork());
+        organization.setBestTeacher(throughStudents.getBestTeacher());
+        organization.setAppearance(throughStudents.getAppearance());
+        organization.setWorstTeacher(throughStudents.getWorstTeacher());
         organization.setDateOfPassage(LocalDateTime.now());
 
         organizationThroughStudentsDao.createOrganizationThroughStudents(organization);
     }
+
+    @Override
+    public void getGroups() {
+
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.example.college.controller;
 
 
+import com.example.college.dao.TeacherThroughStudentsDao;
 import com.example.college.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin")
 public class AdminController {
 
-    private final UserService userService;
+    private final TeacherThroughStudentsDao teacherThroughStudentsDao;
 
+    @GetMapping("auth")
     public String auth() {
+        System.out.println(teacherThroughStudentsDao.getTeachers());
+        System.out.println(teacherThroughStudentsDao.getEvaluationOfTheWorkOfTheGroupCurator());
         return "";
     }
 }
