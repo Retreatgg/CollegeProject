@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,9 +89,18 @@ public class OrganizationThroughUndergraduateDao {
     }
 
     public List<Map<String, Object>> getStaticsWithCount(String columnName) {
-        String sql =  "SELECT " + columnName + " AS value, COUNT(*) AS count " +
+        String totalCountQuery = "SELECT COUNT(*) FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES";
+        int totalCount = jdbcTemplate.queryForObject(totalCountQuery, Integer.class);
+
+        String sql = "SELECT " + columnName + ", (COUNT(*) * 100 / ?) AS percentage " +
                 "FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES " +
                 "GROUP BY " + columnName;
-        return jdbcTemplate.queryForList(sql);
+
+        return jdbcTemplate.query(sql, new Object[]{totalCount}, (rs, rowNum) -> {
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put(columnName, rs.getString(columnName));
+            resultMap.put("percentage", rs.getDouble("percentage"));
+            return resultMap;
+        });
     }
 }

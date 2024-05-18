@@ -17,6 +17,6 @@ public class AdminController {
 
     @GetMapping("auth")
     public String auth() {
-        return "";
+        return "test";
     }
 }

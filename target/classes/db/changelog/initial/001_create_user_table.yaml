@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for Users
+      author: Argen
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  type: varchar(75)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(150)
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false

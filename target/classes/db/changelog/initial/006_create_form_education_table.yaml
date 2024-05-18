@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table FORM EDUCATION
+      author: Argen
+      changes:
+        - createTable:
+            tableName: form_education
+            columns:
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    primaryKey: true
+                    nullable: false

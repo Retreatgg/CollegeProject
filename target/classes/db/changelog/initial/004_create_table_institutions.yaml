@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table INSTITUTIONS
+      author: Argen
+      changes:
+        - createTable:
+            tableName: INSTITUTIONS
+            columns:
+              - column:
+                  name: name
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+                    primaryKey: true

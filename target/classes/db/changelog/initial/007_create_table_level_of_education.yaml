@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table LEVEL OF EDUCATION
+      author: Argen
+      changes:
+        - createTable:
+            tableName: level_of_education
+            columns:
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    primaryKey: true
+                    nullable: false

@@ -1,14 +1,13 @@
 package com.example.college.controller;
 
+import com.example.college.dto.*;
 import com.example.college.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("api/form/static")
 public class FormsController {
@@ -20,12 +19,12 @@ public class FormsController {
     private final TeacherThroughStudentsService teacherThroughStudentsService;
 
 
-    @GetMapping("employer_assesmenent/count")
+    @GetMapping("employer_assessment/count")
     public ResponseEntity<?> employerCount(@RequestParam String columnName) {
         return ResponseEntity.ok(employerAssessmentService.getStaticWithCount(columnName));
     }
 
-    @GetMapping("employer_assesment")
+    @GetMapping("employer_assessment")
     public ResponseEntity<?> employer(@RequestParam String columName) {
         return ResponseEntity.ok(employerAssessmentService.getStaticColumn(columName));
     }
@@ -69,5 +68,31 @@ public class FormsController {
     public ResponseEntity<?> teacher(@RequestParam String columName) {
         return ResponseEntity.ok(teacherThroughStudentsService.getStaticColumn(columName));
     }
+
+    @PostMapping("create/teacher")
+    public HttpStatus createTeacher(@RequestBody TeacherThroughStudentsCreateDto createDto) {
+        teacherThroughStudentsService.createTeacherThroughStudents(createDto);
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("create/satisfaction")
+    public HttpStatus createSatisfaction(@RequestBody SatisfactionRatingCreateDto createDto) {
+        satisfactionRatingService.createSatisfactionRating(createDto);
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("create/org_undergraduate")
+    public HttpStatus createUndergraduate(@RequestBody OrganizationThroughUndergraduateCreateDto createDto) {
+        organizationThroughUndergraduateService.createOrganizationThroughUndergraduate(createDto);
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("create/org_students")
+    public HttpStatus createStudent(@RequestBody OrganizationThroughStudentsCreateDto createDto) {
+        organizationThroughStudentsService.createOrganizationThroughStudents(createDto);
+        return HttpStatus.OK;
+    }
+
+
 
 }
