@@ -79,27 +79,18 @@ public class OrganizationThroughUndergraduateDao {
         return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
-    public List<Map<String, Object>> getResultsByInstitute() {
+    public List<String> getStaticColumn(String columnName) {
         String sql = """
-                select INSTITUTION_NAME, count(*) as count from EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES group by INSTITUTION_NAME
+                select %s from EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES
                 """;
 
-        return jdbcTemplate.queryForList(sql);
+        return jdbcTemplate.queryForList(sql, String.class, columnName);
     }
 
-    public List<Map<String, Object>> getGroupsWithCount() {
-        String sql = """
-                SELECT "GROUP", COUNT(*) AS count FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES GROUP BY "GROUP";
-                """;
-
-        return jdbcTemplate.queryForList(sql);
-    }
-
-    public List<Map<String, Object>> getCoursesWithCount() {
-        String sql = """
-                SELECT "COURSE", COUNT(*) AS count FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES GROUP BY "COURSE";
-                """;
-
+    public List<Map<String, Object>> getStaticsWithCount(String columnName) {
+        String sql =  "SELECT " + columnName + " AS value, COUNT(*) AS count " +
+                "FROM EDUCATIONAL_ORGANIZATION_THROUGH_THE_EYES_OF_UNDERGRADUATES " +
+                "GROUP BY " + columnName;
         return jdbcTemplate.queryForList(sql);
     }
 }

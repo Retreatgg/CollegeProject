@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +39,16 @@ public class TeacherThroughStudentsServiceImpl implements TeacherThroughStudents
         teacherThroughStudents.setDateOfPassage(LocalDateTime.now());
 
         teacherThroughStudentsDao.createTeacherThroughStudentsDao(teacherThroughStudents);
+    }
+
+
+    @Override
+    public List<String> getStaticColumn(String columnName) {
+        return teacherThroughStudentsDao.getStaticColumn(columnName);
+    }
+
+    @Override
+    public List<Map<String, Object>> getStaticWithCount(String columnName) {
+        return teacherThroughStudentsDao.getStaticsWithCount(columnName);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -55,9 +56,15 @@ public class OrganizationThroughStudentsServiceImpl implements OrganizationThrou
         organizationThroughStudentsDao.createOrganizationThroughStudents(organization);
     }
 
-    @Override
-    public void getGroups() {
 
+    @Override
+    public List<String> getStaticColumn(String columnName) {
+        return organizationThroughStudentsDao.getStaticColumn(columnName);
+    }
+
+    @Override
+    public List<Map<String, Object>> getStaticWithCount(String columnName) {
+        return organizationThroughStudentsDao.getStaticsWithCount(columnName);
     }
 
 }

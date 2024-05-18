@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +27,16 @@ public class SatisfactionRatingServiceImpl implements SatisfactionRatingService 
         satisfactionRating.setDateOfPassage(LocalDateTime.now());
 
         satisfactionRatingDao.createSatisfactionRating(satisfactionRating);
+    }
+
+
+    @Override
+    public List<String> getStaticColumn(String columnName) {
+        return satisfactionRatingDao.getStaticColumn(columnName);
+    }
+
+    @Override
+    public List<Map<String, Object>> getStaticWithCount(String columnName) {
+        return satisfactionRatingDao.getStaticsWithCount(columnName);
     }
 }

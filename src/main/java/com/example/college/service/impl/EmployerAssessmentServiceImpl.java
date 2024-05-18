@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -38,9 +40,21 @@ public class EmployerAssessmentServiceImpl implements EmployerAssessmentService 
         assessment.setStudentAbilities(employerAssessmentCreateDto.getStudentAbilities());
         assessment.setStudentTraining(employerAssessmentCreateDto.getStudentTraining());
         assessment.setTeamworkSkills(employerAssessmentCreateDto.getTeamworkSkills());
+        assessment.setYourSuggestions(employerAssessmentCreateDto.getYourSuggestions());
         assessment.setYourSuggestionsForChanges(employerAssessmentCreateDto.getYourSuggestionsForChanges());
         assessment.setWrittenAndOralLiteracy(employerAssessmentCreateDto.getWrittenAndOralLiteracy());
 
         employerAssessmentDao.createEmployerAssessment(assessment);
+    }
+
+
+    @Override
+    public List<String> getStaticColumn(String columnName) {
+        return employerAssessmentDao.getStaticColumn(columnName);
+    }
+
+    @Override
+    public List<Map<String, Object>> getStaticWithCount(String columnName) {
+        return employerAssessmentDao.getStaticsWithCount(columnName);
     }
 }

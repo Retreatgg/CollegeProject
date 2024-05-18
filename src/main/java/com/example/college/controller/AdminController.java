@@ -17,8 +17,6 @@ public class AdminController {
 
     @GetMapping("auth")
     public String auth() {
-        System.out.println(teacherThroughStudentsDao.getTeachers());
-        System.out.println(teacherThroughStudentsDao.getEvaluationOfTheWorkOfTheGroupCurator());
         return "";
     }
 }

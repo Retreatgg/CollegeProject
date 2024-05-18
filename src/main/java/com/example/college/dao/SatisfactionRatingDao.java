@@ -8,6 +8,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
+
 @Component
 @RequiredArgsConstructor
 public class SatisfactionRatingDao {
@@ -74,5 +77,20 @@ public class SatisfactionRatingDao {
                 """;
 
         return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    public List<String> getStaticColumn(String columnName) {
+        String sql = """
+                select %s from SATISFACTION_RATING
+                """;
+
+        return jdbcTemplate.queryForList(sql, String.class, columnName);
+    }
+
+    public List<Map<String, Object>> getStaticsWithCount(String columnName) {
+        String sql =  "SELECT " + columnName + " AS value, COUNT(*) AS count " +
+                "FROM SATISFACTION_RATING " +
+                "GROUP BY " + columnName;
+        return jdbcTemplate.queryForList(sql);
     }
 }
