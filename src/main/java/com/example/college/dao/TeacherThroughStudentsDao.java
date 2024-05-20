@@ -75,7 +75,7 @@ public class TeacherThroughStudentsDao {
         int totalCount = jdbcTemplate.queryForObject(totalCountQuery, Integer.class);
 
         String sql = "SELECT " + columnName + ", (COUNT(*) * 100 / ?) AS percentage " +
-                "FROM EMPLOYER_ASSESSMENT " +
+                "FROM TEACHER_THROUGH_THE_EYES_OF_A_STUDENT " +
                 "GROUP BY " + columnName;
 
         return jdbcTemplate.query(sql, new Object[]{totalCount}, (rs, rowNum) -> {

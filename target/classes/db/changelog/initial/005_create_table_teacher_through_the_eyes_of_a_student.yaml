@@ -17,24 +17,21 @@ databaseChangeLog:
                   name: institution_name
                   type: varchar(120)
                   constraints:
-                    nullable: false
+
                     foreignKeyName: fk_institution_name
                     references: institutions(name)
               - column:
                   name: group
                   type: varchar(45)
-                  constraints:
-                    nullable: false
+
               - column:
                   name: discipline
                   type: varchar(120)
-                  constraints:
-                    nullable: false
+
               - column:
                   name: teacher_full_name
                   type: varchar(150)
-                  constraints:
-                    nullable: false
+
               - column:
                   name: presentation_of_material
                   type: int
