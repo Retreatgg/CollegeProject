@@ -9,12 +9,15 @@ import com.example.college.repository.InstitutionRepository;
 import com.example.college.repository.LevelOfEducationRepository;
 import com.example.college.repository.OrganizationThroughStudentsRepository;
 import com.example.college.service.OrganizationThroughStudentsService;
+import com.example.college.util.ServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.college.util.ServiceUtil.buildResultList;
 
 
 @Service
@@ -74,8 +77,11 @@ public class OrganizationThroughStudentsServiceImpl implements OrganizationThrou
     }
 
     @Override
-    public List<Map<String, Object>> getStaticWithCount(String columnName) {
-        return organizationThroughStudentsDao.getStaticsWithCount(columnName);
+    public List<Map<String, Object>> getStaticsWithCount(String columnName) {
+        int totalCount = organizationThroughStudentsDao.countPassing();
+        Map<Integer, Integer> resultMap = organizationThroughStudentsDao.getStaticsWithCount(columnName);
+
+        return ServiceUtil.buildResultList(columnName, totalCount, resultMap);
     }
 
 }

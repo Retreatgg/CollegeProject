@@ -6,6 +6,7 @@ import com.example.college.model.TeacherThroughStudents;
 import com.example.college.repository.InstitutionRepository;
 import com.example.college.repository.TeacherThroughStudentsRepository;
 import com.example.college.service.TeacherThroughStudentsService;
+import com.example.college.util.ServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,9 @@ public class TeacherThroughStudentsServiceImpl implements TeacherThroughStudents
 
     @Override
     public List<Map<String, Object>> getStaticWithCount(String columnName) {
-        return teacherThroughStudentsDao.getStaticsWithCount(columnName);
+        int totalCount = teacherThroughStudentsDao.countPassing();
+        Map<Integer, Integer> resultMap = teacherThroughStudentsDao.getStaticsWithCount(columnName);
+
+        return ServiceUtil.buildResultList(columnName, totalCount, resultMap);
     }
 }

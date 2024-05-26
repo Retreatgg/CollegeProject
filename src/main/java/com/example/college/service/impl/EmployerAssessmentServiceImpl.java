@@ -5,6 +5,7 @@ import com.example.college.dto.EmployerAssessmentCreateDto;
 import com.example.college.model.EmployerAssessment;
 import com.example.college.repository.EmployerAssessmentRepository;
 import com.example.college.service.EmployerAssessmentService;
+import com.example.college.util.ServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,9 @@ public class EmployerAssessmentServiceImpl implements EmployerAssessmentService 
 
     @Override
     public List<Map<String, Object>> getStaticWithCount(String columnName) {
-        return employerAssessmentDao.getStaticsWithCount(columnName);
+        int totalCount = employerAssessmentDao.countPassing();
+        Map<Integer, Integer> resultMap = employerAssessmentDao.getStaticsWithCount(columnName);
+
+        return ServiceUtil.buildResultList(columnName, totalCount, resultMap);
     }
 }

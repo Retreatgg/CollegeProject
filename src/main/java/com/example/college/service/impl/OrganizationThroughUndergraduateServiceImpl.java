@@ -7,6 +7,7 @@ import com.example.college.repository.FormOfEducationRepository;
 import com.example.college.repository.InstitutionRepository;
 import com.example.college.repository.OrganizationThroughUndergraduateRepository;
 import com.example.college.service.OrganizationThroughUndergraduateService;
+import com.example.college.util.ServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +70,9 @@ public class OrganizationThroughUndergraduateServiceImpl implements Organization
 
     @Override
     public List<Map<String, Object>> getStaticWithCount(String columnName) {
-        return organizationThroughUndergraduateDao.getStaticsWithCount(columnName);
+        int totalCount = organizationThroughUndergraduateDao.countPassing();
+        Map<Integer, Integer> resultMap = organizationThroughUndergraduateDao.getStaticsWithCount(columnName);
+
+        return ServiceUtil.buildResultList(columnName, totalCount, resultMap);
     }
 }

@@ -5,6 +5,7 @@ import com.example.college.dto.SatisfactionRatingCreateDto;
 import com.example.college.model.SatisfactionRating;
 import com.example.college.repository.SatisfactionRatingRepository;
 import com.example.college.service.SatisfactionRatingService;
+import com.example.college.util.ServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -76,6 +77,9 @@ public class SatisfactionRatingServiceImpl implements SatisfactionRatingService 
 
     @Override
     public List<Map<String, Object>> getStaticWithCount(String columnName) {
-        return satisfactionRatingDao.getStaticsWithCount(columnName);
+        int totalCount = satisfactionRatingDao.countPassing();
+        Map<Integer, Integer> resultMap = satisfactionRatingDao.getStaticsWithCount(columnName);
+
+        return ServiceUtil.buildResultList(columnName, totalCount, resultMap);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -15,12 +16,13 @@ public class SatisfactionRatingDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public Long countPassing() {
+    public Integer countPassing() {
         String sql = """
                 select max(id) from SATISFACTION_RATING
                 """;
 
-        return jdbcTemplate.queryForObject(sql, Long.class);
+        Integer result = jdbcTemplate.queryForObject(sql, Integer.class);
+        return Optional.ofNullable(result).orElse(0);
     }
 
     public List<String> getStaticColumn(String columnName) {
@@ -31,19 +33,18 @@ public class SatisfactionRatingDao {
         return jdbcTemplate.queryForList(sql, String.class, columnName);
     }
 
-    public List<Map<String, Object>> getStaticsWithCount(String columnName) {
-        String totalCountQuery = "SELECT COUNT(*) FROM SATISFACTION_RATING";
-        int totalCount = jdbcTemplate.queryForObject(totalCountQuery, Integer.class);
-
-        String sql = "SELECT " + columnName + ", (COUNT(*) * 100 / ?) AS percentage " +
+    public Map<Integer, Integer> getStaticsWithCount(String columnName) {
+        String sql = "SELECT " + columnName + ", COUNT(*) " +
                 "FROM SATISFACTION_RATING " +
                 "GROUP BY " + columnName;
 
-        return jdbcTemplate.query(sql, new Object[]{totalCount}, (rs, rowNum) -> {
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put(columnName, rs.getString(columnName));
-            resultMap.put("percentage", rs.getDouble("percentage"));
-            return resultMap;
+        Map<Integer, Integer> resultMap = new HashMap<>();
+        jdbcTemplate.query(sql, (rs, rowNum) -> {
+            int value = rs.getInt(columnName);
+            int count = rs.getInt(2);
+            resultMap.put(value, count);
+            return null;
         });
+        return resultMap;
     }
 }

@@ -13,5 +13,5 @@ public interface OrganizationThroughStudentsService {
 
     List<String> getStaticColumn(String columnName);
 
-    List<Map<String, Object>> getStaticWithCount(String columnName);
+    List<Map<String, Object>> getStaticsWithCount(String columnName);
 }

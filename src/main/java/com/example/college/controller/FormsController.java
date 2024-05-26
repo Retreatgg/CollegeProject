@@ -31,7 +31,7 @@ public class FormsController {
 
     @GetMapping("org_student/count")
     public ResponseEntity<?> studentCount(@RequestParam String columnName) {
-        return ResponseEntity.ok(organizationThroughStudentsService.getStaticWithCount(columnName));
+        return ResponseEntity.ok(organizationThroughStudentsService.getStaticsWithCount(columnName));
     }
 
     @GetMapping("org_student")
