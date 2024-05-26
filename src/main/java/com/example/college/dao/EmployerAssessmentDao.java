@@ -15,54 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class EmployerAssessmentDao {
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
-
-    public void createEmployerAssessment(EmployerAssessment assessment) {
-        String sql = """
-                insert into EMPLOYER_ASSESSMENT(
-                educational_programs, start_year_cooperation, count_completed_internship, 
-                count_employed, count_working_in_their_specialty, student_training, professional_training_graduates, 
-                general_theoretical_training, basic_practical_skills, written_and_oral_literacy, 
-                ability_to_acquire_new_knowledge, student_abilities, creativity, importance_foreign_languages, 
-                need_for_interpersonal_skills, work_skills, teamwork_skills, independent_workskills, 
-                questions_in_the_questionnaire, your_suggestions, your_suggestions_for_changes, date_of_passage
-                ) 
-                values (
-                :educational_programs, :start_year_cooperation, :count_completed_internship, 
-                :count_employed, :count_working_in_their_specialty, :student_training, :professional_training_graduates,
-                :general_theoretical_training, :basic_practical_skills, :written_and_oral_literacy, 
-                :ability_to_acquire_new_knowledge, :student_abilities, :creativity, :importance_foreign_languages,
-                :need_for_interpersonal_skills, :work_skills, :teamwork_skills, :independent_workskills,
-                :questions_in_the_questionnaire, :your_suggestions, :your_suggestions_for_changes, :date_of_passage
-                )
-                """;
-
-        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
-                .addValue("educational_programs", assessment.getEducationalPrograms())
-                .addValue("start_year_cooperation", assessment.getStartYearCooperation())
-                .addValue("count_completed_internship", assessment.getCountCompletedInternship())
-                .addValue("count_employed", assessment.getCountEmployed())
-                .addValue("count_working_in_their_specialty", assessment.getCountWorkingInTheirSpecialty())
-                .addValue("student_training", assessment.getStudentTraining())
-                .addValue("professional_training_graduates", assessment.getProfessionalTrainingGraduates())
-                .addValue("general_theoretical_training", assessment.getGeneralTheoreticalTraining())
-                .addValue("basic_practical_skills", assessment.getBasicPracticalSkills())
-                .addValue("written_and_oral_literacy", assessment.getWrittenAndOralLiteracy())
-                .addValue("ability_to_acquire_new_knowledge", assessment.getAbilityToAcquireNewKnowledge())
-                .addValue("student_abilities", assessment.getStudentAbilities())
-                .addValue("creativity", assessment.getCreativity())
-                .addValue("importance_foreign_languages", assessment.getImportanceForeignLanguages())
-                .addValue("need_for_interpersonal_skills", assessment.getNeedForInterpersonalSkills())
-                .addValue("work_skills", assessment.getWorkSkills())
-                .addValue("teamwork_skills", assessment.getTeamworkSkills())
-                .addValue("independent_workskills", assessment.getIndependentWorkSkills())
-                .addValue("questions_in_the_questionnaire", assessment.getQuestionsInTheQuestionnaire())
-                .addValue("your_suggestions", assessment.getYourSuggestions())
-                .addValue("your_suggestions_for_changes", assessment.getYourSuggestionsForChanges())
-                .addValue("date_of_passage", assessment.getDateOfPassage()));
-    }
-
 
     public Long countPassing() {
         String sql = """

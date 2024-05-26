@@ -3,6 +3,11 @@ package com.example.college.service.impl;
 import com.example.college.dao.OrganizationThroughStudentsDao;
 import com.example.college.dto.OrganizationThroughStudentsCreateDto;
 import com.example.college.model.OrganizationThroughStudents;
+import com.example.college.model.OrganizationThroughUndergraduate;
+import com.example.college.repository.FormOfEducationRepository;
+import com.example.college.repository.InstitutionRepository;
+import com.example.college.repository.LevelOfEducationRepository;
+import com.example.college.repository.OrganizationThroughStudentsRepository;
 import com.example.college.service.OrganizationThroughStudentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,43 +22,49 @@ import java.util.Map;
 public class OrganizationThroughStudentsServiceImpl implements OrganizationThroughStudentsService {
 
     private final OrganizationThroughStudentsDao organizationThroughStudentsDao;
+    private final OrganizationThroughStudentsRepository organizationThroughStudentsRepository;
+    private final FormOfEducationRepository formOfEducationRepository;
+    private final InstitutionRepository institutionRepository;
+    private final LevelOfEducationRepository levelOfEducationRepository;
+
 
     @Override
-    public void createOrganizationThroughStudents(OrganizationThroughStudentsCreateDto throughStudents) {
-        OrganizationThroughStudents organization = new OrganizationThroughStudents();
+    public void createOrganizationThroughStudents(OrganizationThroughStudentsCreateDto createDto) {
+        OrganizationThroughStudents organization = OrganizationThroughStudents.builder()
+                .appearance(createDto.getAppearance())
+                .accessibleElectronicMaterials(createDto.getAccessibleElectronicMaterials())
+                .accessToTechnology(createDto.getAccessToTechnology())
+                .bestTeacher(createDto.getBestTeacher())
+                .course(createDto.getCourse())
+                .canteenWork(createDto.getCanteenWork())
+                .correctChoiceOrganization(createDto.getCorrectChoiceOrganization())
+                .convenienceOfSchedules(createDto.getConvenienceOfSchedules())
+                .correctChoiceDirection(createDto.getCorrectChoiceDirection())
+                .convenienceOfClassrooms(createDto.getConvenienceOfClassrooms())
+                .dateOfPassage(LocalDateTime.now())
+                .group(createDto.getGroup())
+                .formOfEducation(formOfEducationRepository.findById(createDto.getFormOfEducation().getName()).get())
+                .learningOutcomes(createDto.getLearningOutcomes())
+                .levelOfStudy(levelOfEducationRepository.findById(createDto.getLevelOfStudy().getName()).get())
+                .libraryWork(createDto.getLibraryWork())
+                .institution(institutionRepository.findById(createDto.getInstitutionName().getName()).get())
+                .medicalService(createDto.getMedicalService())
+                .modernEquipment(createDto.getModernEquipment())
+                .negative(createDto.getNegative())
+                .objectivityOfTeachers(createDto.getObjectivityOfTeachers())
+                .relevanceOfInformation(createDto.getRelevanceOfInformation())
+                .positive(createDto.getPositive())
+                .payLevel(createDto.getPayLevel())
+                .psychologicalSupport(createDto.getPsychologicalSupport())
+                .participationInScience(createDto.getParticipationInScience())
+                .qualityOfEvents(createDto.getQualityOfEvents())
+                .qualityTeaching(createDto.getQualityTeaching())
+                .teachingStaff(createDto.getTeachingStaff())
+                .worstTeacher(createDto.getWorstTeacher())
+                .build();
 
-        organization.setCourse(throughStudents.getCourse());
-        organization.setGroup(throughStudents.getGroup());
-        organization.setFormOfEducation(throughStudents.getFormOfEducation().getName());
-        organization.setLevelOfStudy(throughStudents.getLevelOfStudy().getName());
-        organization.setInstitutionName(throughStudents.getInstitutionName().getName());
-        organization.setAccessibleElectronicMaterials(throughStudents.getAccessibleElectronicMaterials());
-        organization.setAccessToTechnology(throughStudents.getAccessToTechnology());
-        organization.setTeachingStaff(throughStudents.getTeachingStaff());
-        organization.setRelevanceOfInformation(throughStudents.getRelevanceOfInformation());
-        organization.setQualityTeaching(throughStudents.getQualityTeaching());
-        organization.setQualityOfEvents(throughStudents.getQualityOfEvents());
-        organization.setPsychologicalSupport(throughStudents.getPsychologicalSupport());
-        organization.setPositive(throughStudents.getPositive());
-        organization.setPayLevel(throughStudents.getPayLevel());
-        organization.setParticipationInScience(throughStudents.getParticipationInScience());
-        organization.setObjectivityOfTeachers(throughStudents.getObjectivityOfTeachers());
-        organization.setNegative(throughStudents.getNegative());
-        organization.setModernEquipment(throughStudents.getModernEquipment());
-        organization.setMedicalService(throughStudents.getMedicalService());
-        organization.setLibraryWork(throughStudents.getLibraryWork());
-        organization.setLearningOutcomes(throughStudents.getLearningOutcomes());
-        organization.setCorrectChoiceOrganization(throughStudents.getCorrectChoiceOrganization());
-        organization.setCorrectChoiceDirection(throughStudents.getCorrectChoiceDirection());
-        organization.setConvenienceOfSchedules(throughStudents.getConvenienceOfSchedules());
-        organization.setConvenienceOfClassrooms(throughStudents.getConvenienceOfClassrooms());
-        organization.setCanteenWork(throughStudents.getCanteenWork());
-        organization.setBestTeacher(throughStudents.getBestTeacher());
-        organization.setAppearance(throughStudents.getAppearance());
-        organization.setWorstTeacher(throughStudents.getWorstTeacher());
-        organization.setDateOfPassage(LocalDateTime.now());
 
-        organizationThroughStudentsDao.createOrganizationThroughStudents(organization);
+        organizationThroughStudentsRepository.save(organization);
     }
 
 

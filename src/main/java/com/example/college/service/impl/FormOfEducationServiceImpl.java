@@ -1,8 +1,8 @@
 package com.example.college.service.impl;
 
-import com.example.college.dao.FormOfEducationDao;
 import com.example.college.dto.FormOfEducationDto;
 import com.example.college.model.FormOfEducation;
+import com.example.college.repository.FormOfEducationRepository;
 import com.example.college.service.FormOfEducationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FormOfEducationServiceImpl implements FormOfEducationService {
 
-    private final FormOfEducationDao formOfEducationDao;
+    private final FormOfEducationRepository formOfEducationRepository;
 
     @Override
     public List<FormOfEducationDto> getFormEducations() {
-        List<FormOfEducation> formOfEducations = formOfEducationDao.getLevelsOfEducation();
+        List<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
         List<FormOfEducationDto> dtos = new ArrayList<>();
 
         formOfEducations.forEach(form -> {
@@ -34,7 +34,7 @@ public class FormOfEducationServiceImpl implements FormOfEducationService {
 
     @Override
     public FormOfEducationDto getEducationByName(String name) {
-        Optional<FormOfEducation> formOfEducationOptional = formOfEducationDao.getFormOfEducationByName(name);
+        Optional<FormOfEducation> formOfEducationOptional = formOfEducationRepository.findById(name);
         FormOfEducation formOfEducation = formOfEducationOptional.orElseThrow();
 
         return FormOfEducationDto.builder()

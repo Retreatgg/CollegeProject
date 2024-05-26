@@ -52,6 +52,12 @@ databaseChangeLog:
                   name: quality_teaching
                   type: integer
               - column:
+                  name: convenience_of_schedules
+                  type: integer
+              - column:
+                  name: convenience_of_classrooms
+                  type: integer
+              - column:
                   name: pay_level
                   type: integer
               - column:

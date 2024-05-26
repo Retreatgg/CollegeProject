@@ -50,6 +50,27 @@ databaseChangeLog:
                   name: equipment_conditions
                   type: integer
               - column:
+                  name: information_security
+                  type: integer
+              - column:
+                  name: volume_and_access_to_information
+                  type: integer
+              - column:
+                  name: regulatory_documents
+                  type: integer
+              - column:
+                  name: activity_level
+                  type: integer
+              - column:
+                  name: activity_level_and_contribution
+                  type: integer
+              - column:
+                  name: implementation
+                  type: integer
+              - column:
+                  name: suggestions_and_comments
+                  type: integer
+              - column:
                   name: safety_and_security
                   type: integer
               - column:

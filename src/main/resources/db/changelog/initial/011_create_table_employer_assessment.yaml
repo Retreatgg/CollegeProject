@@ -65,7 +65,7 @@ databaseChangeLog:
                   name: teamwork_skills
                   type: int
               - column:
-                  name: independent_workSkills
+                  name: independent_work_skills
                   type: int
               - column:
                   name: questions_in_the_questionnaire

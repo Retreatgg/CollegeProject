@@ -3,6 +3,7 @@ package com.example.college.service.impl;
 import com.example.college.dao.SatisfactionRatingDao;
 import com.example.college.dto.SatisfactionRatingCreateDto;
 import com.example.college.model.SatisfactionRating;
+import com.example.college.repository.SatisfactionRatingRepository;
 import com.example.college.service.SatisfactionRatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,17 +17,55 @@ import java.util.Map;
 public class SatisfactionRatingServiceImpl implements SatisfactionRatingService {
 
     private final SatisfactionRatingDao satisfactionRatingDao;
+    private final SatisfactionRatingRepository satisfactionRatingRepository;
 
     @Override
-    public void createSatisfactionRating(SatisfactionRatingCreateDto rating) {
-        SatisfactionRating satisfactionRating = new SatisfactionRating();
+    public void createSatisfactionRating(SatisfactionRatingCreateDto createDto) {
+        SatisfactionRating satisfactionRating = SatisfactionRating.builder()
+                .academicTitle(createDto.getAcademicTitle())
+                .activityInterference(createDto.getActivityInterference())
+                .activityLevel(createDto.getActivityLevel())
+                .activityLevelAndContribution(createDto.getActivityLevelAndContribution())
+                .collectiveAgreement(createDto.getCollectiveAgreement())
+                .dateOfPassage(LocalDateTime.now())
+                .degreeOfInvolvement(createDto.getDegreeOfInvolvement())
+                .educationalInstitution(createDto.getEducationalInstitution())
+                .equipmentConditions(createDto.getEquipmentConditions())
+                .helpGuide(createDto.getHelpGuide())
+                .implementation(createDto.getImplementation())
+                .interference(createDto.getInterference())
+                .influenceQMS(createDto.getInfluenceQMS())
+                .informationSecurity(createDto.getInformationSecurity())
+                .isEmployeeOfTheAdministration(createDto.getIsEmployeeOfTheAdministration())
+                .laborRegulations(createDto.getLaborRegulations())
+                .levelOfRegulation(createDto.getLevelOfRegulation())
+                .levelOrganization(createDto.getLevelOrganization())
+                .motivationSystem(createDto.getMotivationSystem())
+                .nameOfTheStructuralUnit(createDto.getNameOfTheStructuralUnit())
+                .organizationAndRating(createDto.getOrganizationAndRating())
+                .privileges(createDto.getPrivileges())
+                .possibilitiesAdm(createDto.getPossibilitiesAdm())
+                .possibilitiesOrg(createDto.getPossibilitiesOrg())
+                .qualitySatisfaction(createDto.getQualitySatisfaction())
+                .qualityManagementSystem(createDto.getQualityManagementSystem())
+                .regulatoryDocuments(createDto.getRegulatoryDocuments())
+                .relationshipLevel(createDto.getRelationshipLevel())
+                .recognitionOfYourSuccessesByYou(createDto.getRecognitionOfYourSuccessesByYou())
+                .recognitionOfYourSuccessesByManagement(createDto.getRecognitionOfYourSuccessesByManagement())
+                .salary(createDto.getSalary())
+                .satisfactionWithTechnology(createDto.getSatisfactionWithTechnology())
+                .safetyAndSecurity(createDto.getSafetyAndSecurity())
+                .specificProposals(createDto.getSpecificProposals())
+                .suggestionsAndComments(createDto.getSuggestionsAndComments())
+                .suggestionsForImprovements(createDto.getSuggestionsForImprovements())
+                .training(createDto.getTraining())
+                .trustLevelInYou(createDto.getTrustLevelInYou())
+                .trustLevelInManagement(createDto.getTrustLevelInManagement())
+                .volumeAndAccessToInformation(createDto.getVolumeAndAccessToInformation())
+                .youAreMissing(createDto.getYouAreMissing())
+                .build();
 
-        satisfactionRating.setAcademicTitle(rating.getAcademicTitle());
-        satisfactionRating.setIsEmployeeOfTheAdministration(rating.getIsEmployeeOfTheAdministration());
-        satisfactionRating.setNameOfTheStructuralUnit(rating.getNameOfTheStructuralUnit());
-        satisfactionRating.setDateOfPassage(LocalDateTime.now());
-
-        satisfactionRatingDao.createSatisfactionRating(satisfactionRating);
+        satisfactionRatingRepository.save(satisfactionRating);
     }
 
 

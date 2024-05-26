@@ -1,8 +1,8 @@
 package com.example.college.service.impl;
 
-import com.example.college.dao.LevelOfEducationDao;
 import com.example.college.dto.LevelOfEducationDto;
 import com.example.college.model.LevelOfEducation;
+import com.example.college.repository.LevelOfEducationRepository;
 import com.example.college.service.LevelOfEducationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LevelOfEducationServiceImpl implements LevelOfEducationService {
 
-    private final LevelOfEducationDao level;
+    private final LevelOfEducationRepository repository;
 
     @Override
     public List<LevelOfEducationDto> getLevels() {
         List<LevelOfEducationDto> dtos = new ArrayList<>();
 
-        List<LevelOfEducation> levelOfEducations = level.getLevelsOfEducation();
+        List<LevelOfEducation> levelOfEducations = repository.findAll();
 
         levelOfEducations.forEach(level -> {
             dtos.add(LevelOfEducationDto.builder()
@@ -34,7 +34,7 @@ public class LevelOfEducationServiceImpl implements LevelOfEducationService {
 
     @Override
     public LevelOfEducationDto getLevel(String name) {
-        Optional<LevelOfEducation> levelOfEducationOptional = level.getLevelOfEducationByName(name);
+        Optional<LevelOfEducation> levelOfEducationOptional = repository.findById(name);
         LevelOfEducation levelOfEducation = levelOfEducationOptional.orElseThrow();
 
         return LevelOfEducationDto.builder()

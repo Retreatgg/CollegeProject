@@ -1,8 +1,8 @@
 package com.example.college.service.impl;
 
-import com.example.college.dao.UserDao;
 import com.example.college.dto.UserDto;
 import com.example.college.model.User;
+import com.example.college.repository.UserRepository;
 import com.example.college.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,13 +14,13 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    private final UserRepository repository;
     private final PasswordEncoder encoder;
 
 
     @Override
     public User getUserByEmail(String email) {
-        return userDao.getUserByEmail(email)
+        return repository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException(("User is not found")));
     }
 

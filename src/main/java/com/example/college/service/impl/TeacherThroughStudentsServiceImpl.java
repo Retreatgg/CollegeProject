@@ -3,6 +3,8 @@ package com.example.college.service.impl;
 import com.example.college.dao.TeacherThroughStudentsDao;
 import com.example.college.dto.TeacherThroughStudentsCreateDto;
 import com.example.college.model.TeacherThroughStudents;
+import com.example.college.repository.InstitutionRepository;
+import com.example.college.repository.TeacherThroughStudentsRepository;
 import com.example.college.service.TeacherThroughStudentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,29 +18,31 @@ import java.util.Map;
 public class TeacherThroughStudentsServiceImpl implements TeacherThroughStudentsService {
 
     private final TeacherThroughStudentsDao teacherThroughStudentsDao;
+    private final TeacherThroughStudentsRepository teacherThroughStudentsRepository;
+    private final InstitutionRepository institutionRepository;
 
     @Override
-    public void createTeacherThroughStudents(TeacherThroughStudentsCreateDto students) {
-        TeacherThroughStudents teacherThroughStudents = new TeacherThroughStudents();
+    public void createTeacherThroughStudents(TeacherThroughStudentsCreateDto createDto) {
+        TeacherThroughStudents teacherThroughStudents = TeacherThroughStudents.builder()
+                .appearance(createDto.getAppearance())
+                .abilityToDialogueWithStudentAudiences(createDto.getAbilityToDialogueWithStudentAudiences())
+                .cultureOfSpeech(createDto.getCultureOfSpeech())
+                .discipline(createDto.getDiscipline())
+                .dateOfPassage(LocalDateTime.now())
+                .evaluationOfTheWorkOfTheGroupCurator(createDto.getEvaluationOfTheWorkOfTheGroupCurator())
+                .group(createDto.getGroup())
+                .institution(institutionRepository.findById(createDto.getInstitutionName().getName()).get())
+                .interestSubject(createDto.getInterestSubject())
+                .involvingStudentsInScientificActivities(createDto.getInvolvingStudentsInScientificActivities())
+                .objectivityInAssessment(createDto.getObjectivityInAssessment())
+                .presentationOfMaterial(createDto.getPresentationOfMaterial())
+                .proportionalityOfRequirementsInExaminations(createDto.getProportionalityOfRequirementsInExaminations())
+                .relationsWithStudents(createDto.getRelationsWithStudents())
+                .teacherFullName(createDto.getTeacherFullName())
+                .usingModernTeachingMethods(createDto.getUsingModernTeachingMethods())
+                .build();
 
-        teacherThroughStudents.setGroup(students.getGroup());
-        teacherThroughStudents.setAppearance(students.getAppearance());
-        teacherThroughStudents.setDiscipline(students.getDiscipline());
-        teacherThroughStudents.setAbilityToDialogueWithStudentAudiences(students.getAbilityToDialogueWithStudentAudiences());
-        teacherThroughStudents.setCultureOfSpeech(students.getCultureOfSpeech());
-        teacherThroughStudents.setEvaluationOfTheWorkOfTheGroupCurator(students.getEvaluationOfTheWorkOfTheGroupCurator());
-        teacherThroughStudents.setInterestSubject(students.getInterestSubject());
-        teacherThroughStudents.setInvolvingStudentsInScientificActivities(students.getInvolvingStudentsInScientificActivities());
-        teacherThroughStudents.setObjectivityInAssessment(students.getObjectivityInAssessment());
-        teacherThroughStudents.setPresentationOfMaterial(students.getPresentationOfMaterial());
-        teacherThroughStudents.setUsingModernTeachingMethods(students.getUsingModernTeachingMethods());
-        teacherThroughStudents.setTeacherFullName(students.getTeacherFullName());
-        teacherThroughStudents.setRelationsWithStudents(students.getRelationsWithStudents());
-        teacherThroughStudents.setProportionalityOfRequirementsInExaminations(students.getProportionalityOfRequirementsInExaminations());
-        teacherThroughStudents.setInstitutionName(students.getInstitutionName().getName());
-        teacherThroughStudents.setDateOfPassage(LocalDateTime.now());
-
-        teacherThroughStudentsDao.createTeacherThroughStudentsDao(teacherThroughStudents);
+        teacherThroughStudentsRepository.save(teacherThroughStudents);
     }
 
 

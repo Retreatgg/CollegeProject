@@ -36,6 +36,12 @@ databaseChangeLog:
                   name: course
                   type: int
               - column:
+                  name: convenience_of_schedules
+                  type: integer
+              - column:
+                  name: convenience_of_classrooms
+                  type: integer
+              - column:
                   name: correct_choice_organization
                   type: integer
               - column:

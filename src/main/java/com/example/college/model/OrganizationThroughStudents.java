@@ -1,44 +1,113 @@
 package com.example.college.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Entity
+@Builder
+@Table(name = "educational_organization_through_the_eyes_of_students")
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrganizationThroughStudents {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String institutionName;
-    private String group;
-    private String formOfEducation;
-    private String levelOfStudy;
-    private Integer course;
-    private Integer correctChoiceOrganization;
-    private Integer correctChoiceDirection;
-    private Integer qualityTeaching;
-    private Integer payLevel;
-    private Integer participationInScience;
-    private Integer qualityOfEvents;
-    private Integer relevanceOfInformation;
-    private Integer modernEquipment;
-    private Integer objectivityOfTeachers;
-    private Integer learningOutcomes;
-    private Integer accessToTechnology;
-    private Integer libraryWork;
-    private Integer convenienceOfSchedules;
-    private Integer convenienceOfClassrooms;
-    private Integer accessibleElectronicMaterials;
-    private Integer psychologicalSupport;
-    private Integer canteenWork;
-    private Integer medicalService;
-    private Integer TeachingStaff;
-    private String bestTeacher;
-    private String worstTeacher;
-    private String positive;
-    private String negative;
-    private String appearance;
-    private LocalDateTime dateOfPassage;
 
+    @ManyToOne
+    @JoinColumn(name = "institution_name")
+    private Institution institution;
+
+    @Column(name = "group")
+    private String group;
+
+    @ManyToOne
+    @JoinColumn(name = "form_of_education")
+    private FormOfEducation formOfEducation;
+
+    @ManyToOne
+    @JoinColumn(name = "level_of_study")
+    private LevelOfEducation levelOfStudy;
+
+    @Column(name = "course")
+    private Integer course;
+
+    @Column(name = "correct_choice_organization")
+    private Integer correctChoiceOrganization;
+
+    @Column(name = "correct_choice_direction")
+    private Integer correctChoiceDirection;
+
+    @Column(name = "quality_teaching")
+    private Integer qualityTeaching;
+
+    @Column(name = "pay_level")
+    private Integer payLevel;
+
+    @Column(name = "participation_in_science")
+    private Integer participationInScience;
+
+    @Column(name = "quality_of_events")
+    private Integer qualityOfEvents;
+
+    @Column(name = "relevance_of_information")
+    private Integer relevanceOfInformation;
+
+    @Column(name = "modern_equipment")
+    private Integer modernEquipment;
+
+    @Column(name = "objectivity_of_teachers")
+    private Integer objectivityOfTeachers;
+
+    @Column(name = "learning_outcomes")
+    private Integer learningOutcomes;
+
+    @Column(name = "access_to_technology")
+    private Integer accessToTechnology;
+
+    @Column(name = "library_work")
+    private Integer libraryWork;
+
+    @Column(name = "convenience_of_schedules")
+    private Integer convenienceOfSchedules;
+
+    @Column(name = "convenience_of_classrooms")
+    private Integer convenienceOfClassrooms;
+
+    @Column(name = "accessible_electronic_materials")
+    private Integer accessibleElectronicMaterials;
+
+    @Column(name = "psychological_support")
+    private Integer psychologicalSupport;
+
+    @Column(name = "canteen_work")
+    private Integer canteenWork;
+
+    @Column(name = "medical_service")
+    private Integer medicalService;
+
+    @Column(name = "teaching_staff")
+    private Integer teachingStaff;
+
+    @Column(name = "best_teacher")
+    private String bestTeacher;
+
+    @Column(name = "worst_teacher")
+    private String worstTeacher;
+
+    @Column(name = "positive")
+    private String positive;
+
+    @Column(name = "negative")
+    private String negative;
+
+    @Column(name = "appearance")
+    private String appearance;
+
+    @Column(name = "date_of_passage")
+    private LocalDateTime dateOfPassage;
 }

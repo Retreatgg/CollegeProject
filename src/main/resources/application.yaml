@@ -2,8 +2,6 @@ server:
   port: 8089
   address: 172.20.10.4
 
-
-
 spring:
   datasource:
     url: jdbc:h2:./db/demo;AUTO_SERVER=true

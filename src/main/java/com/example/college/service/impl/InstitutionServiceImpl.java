@@ -1,8 +1,8 @@
 package com.example.college.service.impl;
 
-import com.example.college.dao.InstitutionDao;
 import com.example.college.dto.InstitutionDto;
 import com.example.college.model.Institution;
+import com.example.college.repository.InstitutionRepository;
 import com.example.college.service.InstitutionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class InstitutionServiceImpl implements InstitutionService {
 
-    private final InstitutionDao institutionDao;
+    private final InstitutionRepository institutionRepository;
 
     @Override
     public List<InstitutionDto> getInstitutes() {
-        List<Institution> institutions = institutionDao.getInstitutions();
+        List<Institution> institutions = institutionRepository.findAll();
         List<InstitutionDto> dtos = new ArrayList<>();
 
         institutions.forEach(e -> {
@@ -33,7 +33,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public InstitutionDto getInstituteByName(String name) {
-        Optional<Institution> institutionOptional = institutionDao.getInstituteByName(name);
+        Optional<Institution> institutionOptional = institutionRepository.findById(name);
         Institution institution = institutionOptional.orElseThrow();
 
         return InstitutionDto.builder()
